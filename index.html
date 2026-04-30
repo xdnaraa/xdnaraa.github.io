@@ -323,7 +323,9 @@ function abrir() {
   iniciarTimer();
 
   clearInterval(autoPlay);
-  autoPlay = setInterval(avancar, 5000);
+  autoPlay = setInterval(() => {
+    if (!pausado) avancar();
+  }, 5000);
 
   atualizar();
 }
@@ -407,19 +409,19 @@ function togglePause() {
   const sound = document.getElementById("camera-sound");
   const musica = document.getElementById("musica");
 
-  // força o som da câmera
   sound.currentTime = 0;
   sound.play().catch(()=>{});
 
   pausado = !pausado;
 
   if (pausado) {
-    clearInterval(autoPlay);
-    musica.pause(); // 🔥 pausa música junto
+    musica.pause();
   } else {
-    autoPlay = setInterval(avancar, 5000);
-    musica.play().catch(()=>{}); // 🔥 volta música
+    musica.play().catch(()=>{});
   }
+
+  atualizarStatus();
+}
 
   atualizarStatus();
 }

@@ -136,7 +136,7 @@
 
 <!-- LOGIN -->
 <div class="tela-login">
-  <h2> só você pode entrar...</h2>
+  <h2> só você pode entrar...se conseguir ;b</h2>
   <input type="password" id="senha" placeholder="senha...">
   <button onclick="entrar()">entrar</button>
   <p id="erro"></p>
@@ -265,7 +265,7 @@
 </div>
 
 <!-- ÁUDIO -->
-<audio id="camera-sound">
+<audio id="camera-sound" preload="auto">
   <source src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3">
 </audio>
 
@@ -289,10 +289,14 @@ function entrar() {
     document.querySelector(".tela-login").style.display = "none";
     document.getElementById("site").style.display = "block";
 
-    // música começa aqui (interação garantida)
     const musica = document.getElementById("musica");
     musica.volume = 0.4;
-    musica.play().catch(()=>{});
+
+    // desbloqueia o áudio de vez
+    musica.play().then(() => {
+      musica.pause();
+      musica.currentTime = 0;
+    }).catch(()=>{});
 
   } else {
     document.getElementById("erro").innerText = "senha errada 😡";
@@ -310,13 +314,14 @@ function mostrarMsg() {
 function abrir() {
   document.getElementById("modal").style.display = "flex";
 
-  // garante que começa rodando
+  const musica = document.getElementById("musica");
+  musica.play().catch(()=>{});
+
   pausado = false;
   atualizarStatus();
 
   iniciarTimer();
 
-  // autoplay funcionando
   clearInterval(autoPlay);
   autoPlay = setInterval(avancar, 5000);
 
@@ -400,15 +405,20 @@ function atualizarStatus() {
 /* PAUSE */
 function togglePause() {
   const sound = document.getElementById("camera-sound");
+  const musica = document.getElementById("musica");
+
+  // força o som da câmera
   sound.currentTime = 0;
-  sound.play();
+  sound.play().catch(()=>{});
 
   pausado = !pausado;
 
   if (pausado) {
     clearInterval(autoPlay);
+    musica.pause(); // 🔥 pausa música junto
   } else {
     autoPlay = setInterval(avancar, 5000);
+    musica.play().catch(()=>{}); // 🔥 volta música
   }
 
   atualizarStatus();

@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>🩸</title>
+
   <style>
     body {
       margin: 0;
@@ -31,7 +32,7 @@
       border: none;
       border-radius: 8px;
       background: #ff4da6;
-      color: pink;
+      color: white;
       cursor: pointer;
     }
 
@@ -40,62 +41,389 @@
       padding: 30px;
     }
 
-    img {
-      width: 200px;
-      border-radius: 15px;
-      margin: 10px;
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .caixa {
+      background: #111;
+      padding: 20px;
+      border-radius: 16px;
+      width: 80%;
+      max-width: 700px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fechar {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+
+    .paused {
+      filter: blur(2px);
+    }
+
+    .foto {
+      min-width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .polaroid {
+      background: white;
+      color: black;
+      padding: 10px 10px 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
+    .polaroid img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .data {
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .descricao {
+      margin-top: 8px;
+      font-size: 14px;
+      font-style: italic;
+      min-height: 20px;
+    }
+
+    .seta {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .esq { left: 10px; }
+    .dir { right: 10px; }
+
+    #status {
+      color: #ff4da6;
+      font-weight: bold;
+    }
+
+    #timer {
+      opacity: 0.7;
+      font-size: 13px;
     }
   </style>
 </head>
+
 <body>
 
 <div class="tela-login">
-  <h2> só você pode entrar... mas SÓ se conseguir, heheh</h2>
-  <input type="password" id="senha" placeholder="digite a senha...">
+  <h2> só você pode entrar...</h2>
+  <input type="password" id="senha" placeholder="senha...">
   <button onclick="entrar()">entrar</button>
-  <p id="erro" style="color:red;"></p>
+  <p id="erro"></p>
 </div>
 
 <div class="conteudo" id="site">
   <h1>feliz aniversário 🎂</h1>
-  <p>tentei programar só pra você… então aproveita ;) </p>
-
-  <div>
-  <p>📅 12/03/2024</p>
-  <img src="https://i.imgur.com/WjzD9qE.jpeg">
-  <p>testandooo</p>
+  <button onclick="abrir()">abrir memórias</button>
 </div>
 
-<div>
-  <p>📅 05/07/2024</p>
-  <img src="https://i.imgur.com/LjGpbMm.jpeg">
-  <p>aaaaaaaaaatesteee</p>
+<div class="modal" id="modal">
+  <div class="caixa">
+
+    <span class="fechar" onclick="fechar()">×</span>
+
+    <h2>📸 memórias</h2>
+
+    <div id="status">▶ PLAYING</div>
+    <div id="timer">tempo: 0s</div>
+
+    <div class="seta esq" onclick="voltar()">‹</div>
+    <div class="seta dir" onclick="avancar()">›</div>
+
+    <div class="carrossel" id="carrossel">
+
+      <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/ktjEOX6.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+      
+      <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/4ALEjDq.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/atabDcG.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/EjKog9Y.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+              <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/afptYJo.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.imgur.com/3W3B0qi.jpeg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+              <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/1200x/c8/f0/8c/c8f08c2187e94a72979e5b946236259d.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+              <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/736x/1a/cd/df/1acddfd587fadb29c3f33f225d86bcda.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/736x/6f/c1/1a/6fc11a28bc037da6994c846c69ee05e7.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+                    <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/1200x/8a/e8/2f/8ae82f02bc57535613be17d3161dcf4b.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+              <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/1200x/80/a2/7d/80a27d6487c71dee4f52427100d049d2.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/736x/7f/4f/68/7f4f68f8e3c279b43c25c66eea3eb33d.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+                    <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/736x/cb/b1/ab/cbb1abdede442ccdaf92b4de5c4e2be3.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+        <div class="foto">
+        <div class="polaroid">
+          <img src="https://i.pinimg.com/736x/8b/9b/17/8b9b171bd5afd4a83c5c92ecefe77102.jpg">
+          <div class="data">XX/XX/XXXX</div>
+          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-  <br><br>
+<audio id="camera-sound">
+  <source src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3">
+</audio>
 
-  <button onclick="mensagem()">clica aqui</button>
-
-  <p id="msg" style="display:none; margin-top:20px;">
-    teste de novo
-  </p>
-</div>
+<audio id="musica" loop>
+  <source src="https://docs.google.com/uc?export=download&id=1-mAKYQlpPBlxQ59kt8C8H1GjMmHA-kZv">
+</audio>
 
 <script>
-  function entrar() {
-    var senha = document.getElementById("senha").value;
 
-    if (senha === "29/12") {
-      document.querySelector(".tela-login").style.display = "none";
-      document.getElementById("site").style.display = "block";
-    } else {
-      document.getElementById("erro").innerText = "senha errada 😡";
+let index = 0;
+let autoPlay;
+let pausado = false;
+let tempo = 0;
+let timerInterval;
+
+/* LOGIN */
+function entrar() {
+  const senha = document.getElementById("senha").value;
+
+  if (senha === "29/12") {
+    document.querySelector(".tela-login").style.display = "none";
+    document.getElementById("site").style.display = "block";
+  } else {
+    document.getElementById("erro").innerText = "senha errada 😡";
+  }
+}
+
+/* ABRIR */
+function abrir() {
+  document.getElementById("modal").style.display = "flex";
+
+  const musica = document.getElementById("musica");
+  musica.volume = 0.4;
+  musica.play();
+
+  iniciarTimer();
+
+  autoPlay = setInterval(avancar, 5000);
+  atualizarStatus();
+  ativarTexto();
+}
+
+/* FECHAR */
+function fechar() {
+  document.getElementById("modal").style.display = "none";
+  document.getElementById("musica").pause();
+
+  clearInterval(autoPlay);
+  clearInterval(timerInterval);
+}
+
+/* CARROSSEL */
+function atualizar() {
+  document.getElementById("carrossel")
+    .style.transform = `translateX(${-index * 100}%)`;
+
+  setTimeout(ativarTexto, 300);
+}
+
+function avancar() {
+  const total = document.querySelectorAll(".foto").length;
+  index = (index + 1) % total;
+  atualizar();
+}
+
+function voltar() {
+  const total = document.querySelectorAll(".foto").length;
+  index = (index - 1 + total) % total;
+  atualizar();
+}
+
+/* TEXTO ANIMADO */
+function escrever(el, text, i = 0) {
+  el.innerHTML = "";
+  function loop() {
+    if (i < text.length) {
+      el.innerHTML += text[i++];
+      setTimeout(loop, 30);
     }
   }
+  loop();
+}
 
-  function mensagem() {
-    document.getElementById("msg").style.display = "block";
+function ativarTexto() {
+  const atual = document.querySelectorAll(".foto")[index];
+  const desc = atual.querySelector(".descricao");
+  escrever(desc, desc.getAttribute("data-text"));
+}
+
+/* TIMER */
+function iniciarTimer() {
+  tempo = 0;
+  clearInterval(timerInterval);
+
+  timerInterval = setInterval(() => {
+    tempo++;
+    document.getElementById("timer").innerText = "tempo: " + tempo + "s";
+  }, 1000);
+}
+
+/* STATUS */
+function atualizarStatus() {
+  const status = document.getElementById("status");
+  const carrossel = document.getElementById("carrossel");
+
+  if (pausado) {
+    status.innerText = "⏸ PAUSED";
+    carrossel.classList.add("paused");
+  } else {
+    status.innerText = "▶ PLAYING";
+    carrossel.classList.remove("paused");
   }
+}
+
+/* PAUSE */
+function togglePause() {
+  const sound = document.getElementById("camera-sound");
+  sound.currentTime = 0;
+  sound.play();
+
+  if (pausado) {
+    autoPlay = setInterval(avancar, 5000);
+    pausado = false;
+  } else {
+    clearInterval(autoPlay);
+    pausado = true;
+  }
+
+  atualizarStatus();
+}
+
+/* clique pausa */
+window.addEventListener("load", () => {
+  document.getElementById("modal").addEventListener("click", (e) => {
+    if (!e.target.classList.contains("seta")) togglePause();
+  });
+});
+
+/* espaço pausa */
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    e.preventDefault();
+    togglePause();
+  }
+});
+
 </script>
 
 </body>

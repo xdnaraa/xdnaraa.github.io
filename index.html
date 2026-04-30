@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,6 +169,10 @@
 
   <button onclick="mostrarMsg()">mensagem secreta</button>
   <p id="msg2" style="display:none; margin-top:10px;"></p>
+  <button id="btnExtra" onclick="alert('sabia que tu ia clicar. enfim, mas já que estamos aqui... feliz aniversário 👍. já mereço um agradecimento só por ter criado um site, mas vamo direto ao ponto: parabéns por aguentar minha existência até hoje, isso aí já é um prêmio por si só.  a gente não é muito de ficar falando “ai te amo” toda hora (nem precisa, é chato), mas tipo… tu sabe né. do meu jeito, eu gosto de você sim. (não se acostuma também.)  obrigada por tudo que você faz e blábláblá...  enfim, espero que teu dia seja bom, que tenha comida boa pra gente comer (sim, a gente) e que ninguém te estresse hoje (mas só hoje). parabéns aí, dona Leinny')" 
+style="display:none; margin-top:10px;">
+  ta, mas agora clica aqui também
+</button>
 
 </div>
 
@@ -307,8 +312,16 @@ musica.play().then(() => {
 /* MENSAGEM */
 function mostrarMsg() {
   const el = document.getElementById("msg2");
-  el.style.display = el.style.display === "block" ? "none" : "block";
-  el.innerText = "mereço um sushizinho pelo esforço, né?";
+  const btn = document.getElementById("btnExtra");
+
+  const visivel = el.style.display === "block";
+
+  el.style.display = visivel ? "none" : "block";
+  btn.style.display = visivel ? "none" : "inline-block";
+
+  if (!visivel) {
+    el.innerText = "mereço um sushizinho pelo esforço, né?";
+  }
 }
 
 /* ABRIR MODAL */

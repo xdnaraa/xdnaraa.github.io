@@ -244,14 +244,6 @@
         </div>
       </div>
 
-      <div class="foto">
-        <div class="polaroid">
-          <img src="">https://i.imgur.com/aD7u61Y.jpeg
-          <div class="data">XX/XX/XXXX</div>
-          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
-        </div>
-      </div>
-
             <div class="foto">
         <div class="polaroid">
           <img src="https://i.imgur.com/i7HlWfy.jpeg">
@@ -284,10 +276,10 @@
 <script>
 
 let index = 0;
-let autoPlay;
+let autoPlay = null;
 let pausado = false;
 let tempo = 0;
-let timerInterval;
+let timerInterval = null;
 
 /* LOGIN */
 function entrar() {
@@ -297,45 +289,43 @@ function entrar() {
     document.querySelector(".tela-login").style.display = "none";
     document.getElementById("site").style.display = "block";
 
+    // música começa aqui (interação garantida)
     const musica = document.getElementById("musica");
     musica.volume = 0.4;
     musica.play().catch(()=>{});
+
   } else {
     document.getElementById("erro").innerText = "senha errada 😡";
   }
 }
 
-/* MEMÓRIA SECRETA */
+/* MENSAGEM */
 function mostrarMsg() {
   const el = document.getElementById("msg2");
-
   el.style.display = el.style.display === "block" ? "none" : "block";
-  el.innerText = "bom, mereço um sushi só por ter feito esse site";
+  el.innerText = "isso aqui é um checkpoint emocional do universo 💌";
 }
 
 /* ABRIR MODAL */
 function abrir() {
   document.getElementById("modal").style.display = "flex";
 
-  document.getElementById("musica").play().catch(()=>{});
+  // garante que começa rodando
+  pausado = false;
+  atualizarStatus();
 
-  tempo = 0;
-  timerInterval = setInterval(() => {
-    tempo++;
-    document.getElementById("timer").innerText = "tempo: " + tempo + "s";
-  }, 1000);
+  iniciarTimer();
 
+  // autoplay funcionando
+  clearInterval(autoPlay);
   autoPlay = setInterval(avancar, 5000);
 
-  atualizarStatus();
-  ativarTexto();
+  atualizar();
 }
 
 /* FECHAR */
 function fechar() {
   document.getElementById("modal").style.display = "none";
-
-  document.getElementById("musica").pause();
 
   clearInterval(autoPlay);
   clearInterval(timerInterval);
@@ -343,8 +333,8 @@ function fechar() {
 
 /* CARROSSEL */
 function atualizar() {
-  document.getElementById("carrossel")
-    .style.transform = `translateX(${-index * 100}%)`;
+  const carrossel = document.getElementById("carrossel");
+  carrossel.style.transform = `translateX(${-index * 100}%)`;
 
   setTimeout(ativarTexto, 300);
 }
@@ -361,7 +351,7 @@ function voltar() {
   atualizar();
 }
 
-/* TEXTO TYPEWRITER */
+/* TEXTO */
 function escrever(el, text, i = 0) {
   el.innerHTML = "";
   function loop() {
@@ -374,12 +364,40 @@ function escrever(el, text, i = 0) {
 }
 
 function ativarTexto() {
-  const atual = document.querySelectorAll(".foto")[index];
+  const fotos = document.querySelectorAll(".foto");
+  const atual = fotos[index];
   const desc = atual.querySelector(".descricao");
   escrever(desc, desc.getAttribute("data-text"));
 }
 
-/* PAUSE SYSTEM */
+/* TIMER */
+function iniciarTimer() {
+  tempo = 0;
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (!pausado) {
+      tempo++;
+      document.getElementById("timer").innerText = "tempo: " + tempo + "s";
+    }
+  }, 1000);
+}
+
+/* STATUS */
+function atualizarStatus() {
+  const status = document.getElementById("status");
+  const carrossel = document.getElementById("carrossel");
+
+  if (pausado) {
+    status.innerText = "⏸ PAUSED";
+    carrossel.classList.add("paused");
+  } else {
+    status.innerText = "▶ PLAYING";
+    carrossel.classList.remove("paused");
+  }
+}
+
+/* PAUSE */
 function togglePause() {
   const sound = document.getElementById("camera-sound");
   sound.currentTime = 0;
@@ -393,18 +411,21 @@ function togglePause() {
     autoPlay = setInterval(avancar, 5000);
   }
 
-  document.getElementById("status").innerText = pausado ? "⏸ PAUSED" : "▶ PLAYING";
-  document.getElementById("carrossel").classList.toggle("paused", pausado);
+  atualizarStatus();
 }
 
-/* CLICK PAUSE */
+/* CLICK */
 document.addEventListener("click", (e) => {
-  if (document.getElementById("modal").style.display === "flex") {
-    if (!e.target.classList.contains("seta")) togglePause();
+  const modal = document.getElementById("modal");
+
+  if (modal.style.display === "flex") {
+    if (!e.target.classList.contains("seta") && !e.target.classList.contains("fechar")) {
+      togglePause();
+    }
   }
 });
 
-/* SPACE PAUSE */
+/* TECLA ESPAÇO */
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     e.preventDefault();

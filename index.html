@@ -134,6 +134,7 @@
 
 <body>
 
+<!-- LOGIN -->
 <div class="tela-login">
   <h2> só você pode entrar...</h2>
   <input type="password" id="senha" placeholder="senha...">
@@ -141,12 +142,38 @@
   <p id="erro"></p>
 </div>
 
+<!-- CONTEÚDO -->
 <div class="conteudo" id="site">
-  <h1>feliz aniversário 🎂</h1>
+
+  <h1>feliz aniversário mamaim🎂</h1>
+
   <button onclick="abrir()">abrir memórias</button>
+
+  <h2>pra você</h2>
+  <p>antes das memórias… duas fotos importantes (ou não)</p>
+
+  <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+    <div class="polaroid">
+      <img src="https://i.imgur.com/uG1Yb0g.png">
+      <div class="data">lindeza 1</div>
+    </div>
+
+    <div class="polaroid">
+      <img src="https://i.imgur.com/BUvrAzW.jpeg">
+      <div class="data">lindeza 2</div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <button onclick="mostrarMsg()">mensagem secreta</button>
+  <p id="msg2" style="display:none; margin-top:10px;"></p>
+
 </div>
 
+<!-- MODAL -->
 <div class="modal" id="modal">
+
   <div class="caixa">
 
     <span class="fechar" onclick="fechar()">×</span>
@@ -163,111 +190,79 @@
 
       <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/ktjEOX6.jpeg">
+          <img src="https://i.imgur.com/qrqDbf6.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
-      
+
       <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/4ALEjDq.jpeg">
+          <img src="https://i.imgur.com/uf5jXUq.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-        <div class="foto">
+            <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/atabDcG.jpeg">
+          <img src="https://i.imgur.com/JejIDFM.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-        <div class="foto">
+      <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/EjKog9Y.jpeg">
+          <img src="https://i.imgur.com/ZwTaOfS.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-              <div class="foto">
+            <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/afptYJo.jpeg">
+          <img src="https://i.imgur.com/fNo9fMD.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-        <div class="foto">
+      <div class="foto">
         <div class="polaroid">
-          <img src="https://i.imgur.com/3W3B0qi.jpeg">
+          <img src="https://i.imgur.com/6GHpaYH.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-              <div class="foto">
+            <div class="foto">
         <div class="polaroid">
-          <img src="https://i.pinimg.com/1200x/c8/f0/8c/c8f08c2187e94a72979e5b946236259d.jpg">
+          <img src="https://i.imgur.com/LSgZ1PW.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-              <div class="foto">
+      <div class="foto">
         <div class="polaroid">
-          <img src="https://i.pinimg.com/736x/1a/cd/df/1acddfd587fadb29c3f33f225d86bcda.jpg">
+          <img src="">https://i.imgur.com/aD7u61Y.jpeg
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-        <div class="foto">
+            <div class="foto">
         <div class="polaroid">
-          <img src="https://i.pinimg.com/736x/6f/c1/1a/6fc11a28bc037da6994c846c69ee05e7.jpg">
+          <img src="https://i.imgur.com/i7HlWfy.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
       </div>
 
-                    <div class="foto">
+      <div class="foto">
         <div class="polaroid">
-          <img src="https://i.pinimg.com/1200x/8a/e8/2f/8ae82f02bc57535613be17d3161dcf4b.jpg">
-          <div class="data">XX/XX/XXXX</div>
-          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
-        </div>
-      </div>
-
-              <div class="foto">
-        <div class="polaroid">
-          <img src="https://i.pinimg.com/1200x/80/a2/7d/80a27d6487c71dee4f52427100d049d2.jpg">
-          <div class="data">XX/XX/XXXX</div>
-          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
-        </div>
-      </div>
-
-        <div class="foto">
-        <div class="polaroid">
-          <img src="https://i.pinimg.com/736x/7f/4f/68/7f4f68f8e3c279b43c25c66eea3eb33d.jpg">
-          <div class="data">XX/XX/XXXX</div>
-          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
-        </div>
-      </div>
-
-                    <div class="foto">
-        <div class="polaroid">
-          <img src="https://i.pinimg.com/736x/cb/b1/ab/cbb1abdede442ccdaf92b4de5c4e2be3.jpg">
-          <div class="data">XX/XX/XXXX</div>
-          <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
-        </div>
-      </div>
-
-        <div class="foto">
-        <div class="polaroid">
-          <img src="https://i.pinimg.com/736x/8b/9b/17/8b9b171bd5afd4a83c5c92ecefe77102.jpg">
+          <img src="https://i.imgur.com/ybgL46D.jpeg">
           <div class="data">XX/XX/XXXX</div>
           <div class="descricao" data-text="XXXXX XX XXXXX XXX XXXXXXX"></div>
         </div>
@@ -277,12 +272,13 @@
   </div>
 </div>
 
+<!-- ÁUDIO -->
 <audio id="camera-sound">
   <source src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3">
 </audio>
 
-<audio id="musica" loop>
-  <source src="https://docs.google.com/uc?export=download&id=1-mAKYQlpPBlxQ59kt8C8H1GjMmHA-kZv">
+<audio controls autoplay loop>
+  <source src="https://files.catbox.moe/3vgiy3.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -300,22 +296,37 @@ function entrar() {
   if (senha === "29/12") {
     document.querySelector(".tela-login").style.display = "none";
     document.getElementById("site").style.display = "block";
+
+    const musica = document.getElementById("musica");
+    musica.volume = 0.4;
+    musica.play().catch(()=>{});
   } else {
     document.getElementById("erro").innerText = "senha errada 😡";
   }
 }
 
-/* ABRIR */
+/* MEMÓRIA SECRETA */
+function mostrarMsg() {
+  const el = document.getElementById("msg2");
+
+  el.style.display = el.style.display === "block" ? "none" : "block";
+  el.innerText = "bom, mereço um sushi só por ter feito esse site";
+}
+
+/* ABRIR MODAL */
 function abrir() {
   document.getElementById("modal").style.display = "flex";
 
-  const musica = document.getElementById("musica");
-  musica.volume = 0.4;
-  musica.play();
+  document.getElementById("musica").play().catch(()=>{});
 
-  iniciarTimer();
+  tempo = 0;
+  timerInterval = setInterval(() => {
+    tempo++;
+    document.getElementById("timer").innerText = "tempo: " + tempo + "s";
+  }, 1000);
 
   autoPlay = setInterval(avancar, 5000);
+
   atualizarStatus();
   ativarTexto();
 }
@@ -323,6 +334,7 @@ function abrir() {
 /* FECHAR */
 function fechar() {
   document.getElementById("modal").style.display = "none";
+
   document.getElementById("musica").pause();
 
   clearInterval(autoPlay);
@@ -349,7 +361,7 @@ function voltar() {
   atualizar();
 }
 
-/* TEXTO ANIMADO */
+/* TEXTO TYPEWRITER */
 function escrever(el, text, i = 0) {
   el.innerHTML = "";
   function loop() {
@@ -367,56 +379,32 @@ function ativarTexto() {
   escrever(desc, desc.getAttribute("data-text"));
 }
 
-/* TIMER */
-function iniciarTimer() {
-  tempo = 0;
-  clearInterval(timerInterval);
-
-  timerInterval = setInterval(() => {
-    tempo++;
-    document.getElementById("timer").innerText = "tempo: " + tempo + "s";
-  }, 1000);
-}
-
-/* STATUS */
-function atualizarStatus() {
-  const status = document.getElementById("status");
-  const carrossel = document.getElementById("carrossel");
-
-  if (pausado) {
-    status.innerText = "⏸ PAUSED";
-    carrossel.classList.add("paused");
-  } else {
-    status.innerText = "▶ PLAYING";
-    carrossel.classList.remove("paused");
-  }
-}
-
-/* PAUSE */
+/* PAUSE SYSTEM */
 function togglePause() {
   const sound = document.getElementById("camera-sound");
   sound.currentTime = 0;
   sound.play();
 
+  pausado = !pausado;
+
   if (pausado) {
-    autoPlay = setInterval(avancar, 5000);
-    pausado = false;
-  } else {
     clearInterval(autoPlay);
-    pausado = true;
+  } else {
+    autoPlay = setInterval(avancar, 5000);
   }
 
-  atualizarStatus();
+  document.getElementById("status").innerText = pausado ? "⏸ PAUSED" : "▶ PLAYING";
+  document.getElementById("carrossel").classList.toggle("paused", pausado);
 }
 
-/* clique pausa */
-window.addEventListener("load", () => {
-  document.getElementById("modal").addEventListener("click", (e) => {
+/* CLICK PAUSE */
+document.addEventListener("click", (e) => {
+  if (document.getElementById("modal").style.display === "flex") {
     if (!e.target.classList.contains("seta")) togglePause();
-  });
+  }
 });
 
-/* espaço pausa */
+/* SPACE PAUSE */
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
     e.preventDefault();

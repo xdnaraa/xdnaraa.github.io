@@ -269,7 +269,7 @@
   <source src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3">
 </audio>
 
-<audio controls autoplay loop>
+<audio id="musica" loop>
   <source src="https://files.catbox.moe/3vgiy3.mp3" type="audio/mpeg">
 </audio>
 
@@ -292,11 +292,12 @@ function entrar() {
     const musica = document.getElementById("musica");
     musica.volume = 0.4;
 
-    // desbloqueia o áudio de vez
-    musica.play().then(() => {
-      musica.pause();
-      musica.currentTime = 0;
-    }).catch(()=>{});
+musica.muted = true;
+musica.play().then(() => {
+  musica.pause();
+  musica.currentTime = 0;
+  musica.muted = false;
+}).catch(()=>{});
 
   } else {
     document.getElementById("erro").innerText = "senha errada 😡";
@@ -323,9 +324,11 @@ function abrir() {
   iniciarTimer();
 
   clearInterval(autoPlay);
-  autoPlay = setInterval(() => {
-    if (!pausado) avancar();
-  }, 5000);
+ autoPlay = setInterval(() => {
+  if (!pausado) {
+    avancar();
+  }
+}, 5000);
 
   atualizar();
 }
@@ -410,7 +413,8 @@ function togglePause() {
   const musica = document.getElementById("musica");
 
   sound.currentTime = 0;
-  sound.play().catch(()=>{});
+sound.volume = 1;
+sound.play().catch(()=>{});
 
   pausado = !pausado;
 
@@ -423,20 +427,15 @@ function togglePause() {
   atualizarStatus();
 }
 
-  atualizarStatus();
-}
-
 /* CLICK */
-document.addEventListener("click", (e) => {
-  const modal = document.getElementById("modal");
-
-  if (modal.style.display === "flex") {
-    if (!e.target.classList.contains("seta") && !e.target.classList.contains("fechar")) {
+window.addEventListener("load", () => {
+  document.getElementById("modal").addEventListener("click", (e) => {
+    if (!e.target.classList.contains("seta") && 
+        !e.target.classList.contains("fechar")) {
       togglePause();
     }
-  }
+  });
 });
-
 /* TECLA ESPAÇO */
 document.addEventListener("keydown", (e) => {
   if (e.code === "Space") {
